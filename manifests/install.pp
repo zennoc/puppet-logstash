@@ -28,6 +28,7 @@ class logstash::install inherits logstash {
 
       if $logstash::bool_create_user == true {
         require logstash::user
+        
       }
       include logstash::skel
 
@@ -39,7 +40,6 @@ class logstash::install inherits logstash {
         extracted_dir       => $created_file,
         owner               => $logstash::process_user,
         group               => $logstash::process_user,
-        require             => [ User[$logstash::process_user] ],
         before              => File ['logstash_link'],
       }
 
