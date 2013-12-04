@@ -18,13 +18,19 @@ class logstash::params {
   $run_options = ''
   $install_prerequisites = true
   $create_user = true
-  $version = '1.1.1'
-  $jartype = 'monolithic'
+  $version = '1.1.13'
+  $jartype = 'flatjar'
   $install = 'source'
   $install_destination = '/opt'
   $install_precommand = ''
   $install_postcommand = ''
-  $init_script_template = 'logstash/logstash.init.erb'
+
+  $init_script_template = $::osfamily ? {
+    'Debian' => 'logstash/logstash.init.erb',
+    # 'Debian' => 'logstash/logstash.init-debian.erb',
+    default  => 'logstash/logstash.init.erb',
+  }
+
   $upstart_template = 'logstash/logstash.upstart.erb'
   $base_install_source = 'http://logstash.objects.dreamhost.com/release'
   $source_dir_patterns = ''
@@ -59,6 +65,10 @@ class logstash::params {
 
   $process_group = $::operatingsystem ? {
     default => 'logstash',
+  }
+
+  $config_file = $::operatingsystem ? {
+    default => '/etc/logstash/logstash.conf',
   }
 
   $config_file_mode = $::operatingsystem ? {
