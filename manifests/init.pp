@@ -489,6 +489,19 @@ class logstash (
     }
   }
 
+  if $logstash::config_file_init {
+    file { 'default-elasticsearch':
+      ensure    => $logstash::manage_file,
+      path      => $logstash::config_file_init,
+      require   => Package[logstash],
+      content   => template('logstash/default-logstash'),
+      mode      => $logstash::config_file_mode,
+      owner     => $logstash::config_file_owner,
+      group     => $logstash::config_file_group,
+      notify    => $logstash::manage_service_autorestart,
+    }
+  }
+
   # ## Include prerequisites class
   if $logstash::bool_install_prerequisites {
     include logstash::prerequisites
