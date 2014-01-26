@@ -490,7 +490,7 @@ class logstash (
   }
 
   if $logstash::config_file_init {
-    file { 'default-elasticsearch':
+    file { 'default-logstash':
       ensure    => $logstash::manage_file,
       path      => $logstash::config_file_init,
       require   => Package[logstash],
