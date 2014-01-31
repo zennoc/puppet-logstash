@@ -39,7 +39,7 @@ OPEN_FILES=<%= scope.lookupvar('logstash::maxopenfiles') %>
 NICE=19
 
 # Set LogStash options
-LS_OPTS="--log ${LOG_FILE} -w 4"
+LS_OPTS="--log ${LOG_FILE} -w 8"
 
 # Set a home directory
 HOME=/var/lib/logstash
