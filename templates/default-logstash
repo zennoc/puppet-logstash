@@ -43,3 +43,7 @@ LS_OPTS="--log ${LOG_FILE} -w 4"
 
 # Set a home directory
 HOME=/var/lib/logstash
+
+# Remove proxy servers bug in 1.4 HTTP client does not honour no_proxy
+http_proxy=""
+https_prox=""
